@@ -79,6 +79,7 @@ function App() {
             }
           `}</style>
           <Navbar />
+          <ScrollToTopOnMount />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
