@@ -1,35 +1,47 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { useLanguage } from './lunguageContext';
-import { Link } from 'react-router-dom';
-import { 
-  Play, 
-  Calendar, 
-  Users, 
-  Heart, 
-  BookOpen, 
+import React, { useRef, useState, useEffect } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useLanguage } from "./lunguageContext";
+import { Link } from "react-router-dom";
+import {
+  Play,
+  Calendar,
+  Users,
+  Heart,
+  BookOpen,
   ArrowRight,
   MapPin,
   Clock,
   Radio,
   TrendingUp,
   Award,
-  Globe2
-} from 'lucide-react';
+  Globe2,
+} from "lucide-react";
+import { useCountUp } from "./useCountUp";
+
+// Count Up Component
+const CountUpStat = ({ end, suffix = "", inView }) => {
+  const count = useCountUp(inView ? end : 0, 2000);
+  return (
+    <>
+      {count}
+      {suffix}
+    </>
+  );
+};
 
 const Home = () => {
   const { t } = useLanguage();
   const statsRef = useRef(null);
-  const isStatsInView = useInView(statsRef, { once: true, margin: '-100px' });
+  const isStatsInView = useInView(statsRef, { once: true, margin: "-100px" });
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Add your church images here
   const heroImages = [
-    '/1.jpg', // Replace with your actual image paths
-    '/6.jpg',
-    '/16.jpg',
-    '/34.jpg',
-    '/19.jpg',
+    "/1.jpg", // Replace with your actual image paths
+    "/6.jpg",
+    "/16.jpg",
+    "/34.jpg",
+    "/19.jpg",
   ];
 
   useEffect(() => {
@@ -39,6 +51,41 @@ const Home = () => {
 
     return () => clearInterval(interval);
   }, [heroImages.length]);
+
+  const stats = [
+    {
+      icon: Users,
+      value: 500,
+      suffix: "+",
+      label: "Members",
+      color: "from-cyan-500 to-cyan-600",
+      size: "large",
+    },
+    {
+      icon: Calendar,
+      value: 50,
+      suffix: "+",
+      label: "Events Yearly",
+      color: "from-pink-500 to-pink-600",
+      size: "small",
+    },
+    {
+      icon: Heart,
+      value: 10,
+      suffix: "+",
+      label: "Ministries",
+      color: "from-cyan-400 to-pink-500",
+      size: "small",
+    },
+    {
+      icon: Globe2,
+      value: 3,
+      suffix: "",
+      label: "Communities",
+      color: "from-pink-600 to-purple-500",
+      size: "medium",
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-black">
@@ -55,7 +102,7 @@ const Home = () => {
               transition={{ duration: 1.5, ease: "easeInOut" }}
               className="absolute inset-0"
             >
-              <div 
+              <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                 style={{
                   backgroundImage: `url(${heroImages[currentImageIndex]})`,
@@ -103,8 +150,8 @@ const Home = () => {
                 onClick={() => setCurrentImageIndex(index)}
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${
                   index === currentImageIndex
-                    ? 'bg-cyan-400 w-8'
-                    : 'bg-white/30 hover:bg-white/50'
+                    ? "bg-cyan-400 w-8"
+                    : "bg-white/30 hover:bg-white/50"
                 }`}
               />
             ))}
@@ -117,7 +164,7 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            {/* Live Badge */}
+            {/* Live Badge 
             <motion.div
               className="inline-flex items-center space-x-2 px-4 py-2 bg-pink-600/20 border border-pink-500/30 rounded-full mb-6 backdrop-blur-sm"
               animate={{ scale: [1, 1.05, 1] }}
@@ -125,7 +172,7 @@ const Home = () => {
             >
               <Radio className="w-4 h-4 text-pink-500" />
               <span className="text-pink-400 text-sm font-medium">{t.home.liveNow}</span>
-            </motion.div>
+            </motion.div>*/}
 
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight">
               {t.home.welcome}
@@ -192,51 +239,200 @@ const Home = () => {
               <div className="flex items-center space-x-3">
                 <Clock className="w-5 h-5 text-cyan-400" />
                 <div className="text-left">
-                  <div className="text-sm text-gray-400">{t.home.sundayService}</div>
-                  <div className="text-white font-semibold">{t.home.serviceTime}</div>
+                  <div className="text-sm text-gray-400">
+                    {t.home.sundayService}
+                  </div>
+                  <div className="text-white font-semibold">
+                    {t.home.serviceTime}
+                  </div>
                 </div>
               </div>
               <div className="hidden sm:block w-px h-12 bg-cyan-500/20"></div>
               <div className="flex items-center space-x-3">
                 <MapPin className="w-5 h-5 text-cyan-400" />
                 <div className="text-left">
-                  <div className="text-white font-semibold">{t.home.serviceLocation}</div>
-                  <div className="text-sm text-gray-400">Waterfalls, Harare</div>
+                  <div className="text-white font-semibold">
+                    {t.home.serviceLocation}
+                  </div>
+                  <div className="text-sm text-gray-400">
+                    Waterfalls, Harare
+                  </div>
                 </div>
               </div>
             </motion.div>
           </motion.div>
         </div>
-
       </section>
 
-      {/* Stats Section */}
-      <section ref={statsRef} className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black via-purple-950/10 to-black">
+      {/* Stats Section - Bento Grid Layout */}
+      <section
+        ref={statsRef}
+        className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black via-purple-950/10 to-black"
+      >
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { icon: Users, value: '500+', label: 'Members', color: 'from-cyan-500 to-cyan-600' },
-              { icon: Calendar, value: '50+', label: 'Events Yearly', color: 'from-pink-500 to-pink-600' },
-              { icon: Heart, value: '10+', label: 'Ministries', color: 'from-cyan-400 to-pink-500' },
-              { icon: Globe2, value: '3', label: 'Communities', color: 'from-pink-600 to-purple-500' },
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isStatsInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="relative group"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-600/20 to-pink-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all"></div>
-                <div className="relative p-6 bg-white/5 backdrop-blur-xl border border-cyan-500/20 rounded-2xl hover:border-cyan-500/40 transition-all text-center">
-                  <div className={`inline-flex p-4 bg-gradient-to-br ${stat.color} rounded-xl mb-4`}>
-                    <stat.icon className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="text-3xl font-bold text-white mb-2">{stat.value}</div>
-                  <div className="text-gray-400 text-sm">{stat.label}</div>
+          {/* Bento Grid */}
+          <div className="grid grid-cols-4 gap-4 md:gap-6">
+            {/* Large stat - spans 2x2 */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isStatsInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6 }}
+              className="col-span-4 md:col-span-2 row-span-2 relative group overflow-hidden rounded-3xl"
+            >
+              {/* Background Image */}
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                style={{ backgroundImage: "url(/1.jpg)", opacity: 0.5 }} // Replace with your church image
+              />
+              {/* Dark Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-black/75 via-black/80 to-black/85 group-hover:from-black/80 group-hover:via-black/75 group-hover:to-black/80 transition-all"></div>
+              {/* Gradient Accent */}
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-600/50 to-pink-600/50 rounded-3xl blur-2xl group-hover:blur-3xl transition-all"></div>
+
+              <div className="relative h-full p-8 md:p-10 backdrop-blur-sm border border-cyan-500/20 rounded-3xl hover:border-cyan-500/40 transition-all flex flex-col justify-between">
+                <div
+                  className={`inline-flex p-6 bg-gradient-to-br ${stats[0].color} rounded-2xl w-fit mb-6 shadow-lg`}
+                >
+                  {React.createElement(stats[0].icon, {
+                    className: "w-10 h-10 md:w-12 md:h-12 text-white",
+                  })}
                 </div>
-              </motion.div>
-            ))}
+                <div>
+                  <div className="text-5xl md:text-7xl font-bold text-white mb-4">
+                    <CountUpStat
+                      end={stats[0].value}
+                      suffix={stats[0].suffix}
+                      inView={isStatsInView}
+                    />
+                  </div>
+                  <div className="text-gray-300 text-lg md:text-xl font-medium">
+                    {stats[0].label}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Small stat - top right */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isStatsInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="col-span-4 md:col-span-2 relative group overflow-hidden rounded-2xl"
+            >
+              {/* Background Image */}
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                style={{ backgroundImage: "url(/6.jpg)" }} // Replace with your church image
+              />
+              {/* Dark Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/80 to-black/85 group-hover:from-black/80 group-hover:via-black/75 group-hover:to-black/80 transition-all"></div>
+              {/* Gradient Accent */}
+              <div className="absolute inset-0 bg-gradient-to-br from-pink-600/50 to-purple-600/50 rounded-2xl blur-xl group-hover:blur-2xl transition-all"></div>
+
+              <div className="relative p-6 md:p-8 backdrop-blur-sm border border-cyan-500/20 rounded-2xl hover:border-cyan-500/40 transition-all h-full flex items-center justify-between">
+                <div>
+                  <div className="text-3xl md:text-5xl font-bold text-white mb-2">
+                    <CountUpStat
+                      end={stats[1].value}
+                      suffix={stats[1].suffix}
+                      inView={isStatsInView}
+                    />
+                  </div>
+                  <div className="text-gray-300 text-sm md:text-base font-medium">
+                    {stats[1].label}
+                  </div>
+                </div>
+                <div
+                  className={`p-4 bg-gradient-to-br ${stats[1].color} rounded-xl shadow-lg`}
+                >
+                  {React.createElement(stats[1].icon, {
+                    className: "w-6 h-6 md:w-8 md:h-8 text-white",
+                  })}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Medium stat - middle right (Communities) */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isStatsInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="col-span-2 md:col-span-1 relative group overflow-hidden rounded-2xl"
+            >
+              {/* Background Image */}
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                style={{ backgroundImage: "url(/16.jpg)" }} // Replace with your church image
+              />
+              {/* Dark Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/80 to-black/85 group-hover:from-black/80 group-hover:via-black/75 group-hover:to-black/80 transition-all"></div>
+              {/* Gradient Accent */}
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-600/20 to-pink-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all"></div>
+
+              <div className="relative p-6 backdrop-blur-sm border border-cyan-500/20 rounded-2xl hover:border-cyan-500/40 transition-all h-full flex flex-col justify-between">
+                <div
+                  className={`inline-flex p-3 bg-gradient-to-br ${stats[3].color} rounded-xl w-fit mb-4 shadow-lg`}
+                >
+                  {React.createElement(stats[3].icon, {
+                    className: "w-5 h-5 text-white",
+                  })}
+                </div>
+                <div>
+                  <div className="text-3xl md:text-4xl font-bold text-white mb-2">
+                    <CountUpStat
+                      end={stats[3].value}
+                      suffix={stats[3].suffix}
+                      inView={isStatsInView}
+                    />
+                  </div>
+                  {/* Mobile: Show abbreviated text, Desktop: Show full text */}
+                  <div className="text-gray-300 text-xs md:text-sm font-medium">
+                    <span className="md:hidden">Groups</span>
+                    <span className="hidden md:inline">{stats[3].label}</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Small stat - bottom right */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isStatsInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="col-span-2 md:col-span-1 relative group overflow-hidden rounded-2xl"
+            >
+              {/* Background Image */}
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                style={{ backgroundImage: "url(/34.jpg)" }} // Replace with your church image
+              />
+              {/* Dark Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/80 to-black/85 group-hover:from-black/80 group-hover:via-black/75 group-hover:to-black/80 transition-all"></div>
+              {/* Gradient Accent */}
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-600/20 to-pink-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all"></div>
+
+              <div className="relative p-6 backdrop-blur-sm border border-cyan-500/20 rounded-2xl hover:border-cyan-500/40 transition-all h-full flex flex-col justify-between">
+                <div
+                  className={`inline-flex p-3 bg-gradient-to-br ${stats[2].color} rounded-xl w-fit mb-4 shadow-lg`}
+                >
+                  {React.createElement(stats[2].icon, {
+                    className: "w-5 h-5 text-white",
+                  })}
+                </div>
+                <div>
+                  <div className="text-3xl md:text-4xl font-bold text-white mb-2">
+                    <CountUpStat
+                      end={stats[2].value}
+                      suffix={stats[2].suffix}
+                      inView={isStatsInView}
+                    />
+                  </div>
+                  <div className="text-gray-300 text-xs md:text-sm font-medium">
+                    {stats[2].label}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -268,7 +464,9 @@ const Home = () => {
               viewport={{ once: true }}
             >
               <div className="inline-block px-4 py-2 bg-cyan-500/20 border border-cyan-500/30 rounded-full mb-4">
-                <span className="text-cyan-400 text-sm font-medium">{t.home.ourMission}</span>
+                <span className="text-cyan-400 text-sm font-medium">
+                  {t.home.ourMission}
+                </span>
               </div>
               <h2 className="text-4xl font-bold text-white mb-6">
                 {t.home.mission}
@@ -290,7 +488,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Features Section - Get Connected with BG Images */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black via-cyan-950/10 to-black">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -306,24 +504,27 @@ const Home = () => {
             {[
               {
                 icon: Users,
-                title: 'Join a Ministry',
-                description: 'Find your place to serve and grow in faith',
-                link: '/ministries',
-                gradient: 'from-cyan-500 to-cyan-600',
+                title: "Join a Ministry",
+                description: "Find your place to serve and grow in faith",
+                link: "/ministries",
+                gradient: "from-cyan-500 to-cyan-600",
+                bgImage: "/1.jpg", // Replace with actual church images
               },
               {
                 icon: Calendar,
-                title: 'Attend an Event',
-                description: 'Connect with others at our upcoming gatherings',
-                link: '/events',
-                gradient: 'from-pink-500 to-pink-600',
+                title: "Attend an Event",
+                description: "Connect with others at our upcoming gatherings",
+                link: "/events",
+                gradient: "from-pink-500 to-pink-600",
+                bgImage: "/6.jpg", // Replace with actual church images
               },
               {
                 icon: Play,
-                title: 'Watch Sermons',
-                description: 'Be inspired by powerful messages from God\'s Word',
-                link: '/sermons',
-                gradient: 'from-cyan-400 to-pink-500',
+                title: "Watch Sermons",
+                description: "Be inspired by powerful messages from God's Word",
+                link: "/sermons",
+                gradient: "from-cyan-400 to-pink-500",
+                bgImage: "/16.jpg", // Replace with actual church images
               },
             ].map((feature, index) => (
               <Link key={index} to={feature.link}>
@@ -333,15 +534,31 @@ const Home = () => {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ y: -10 }}
-                  className="relative group h-full"
+                  className="relative group h-full overflow-hidden rounded-2xl"
                 >
+                  {/* Background Image with Overlay */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                    style={{ backgroundImage: `url(${feature.bgImage})` }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-black/85 to-black/90 group-hover:from-black/85 group-hover:via-black/80 group-hover:to-black/85 transition-all"></div>
+
+                  {/* Gradient Blur Effect */}
                   <div className="absolute inset-0 bg-gradient-to-br from-cyan-600/20 to-pink-600/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-all"></div>
-                  <div className="relative p-8 bg-white/5 backdrop-blur-xl border border-cyan-500/20 rounded-2xl hover:border-cyan-500/40 transition-all h-full">
-                    <div className={`inline-flex p-4 bg-gradient-to-br ${feature.gradient} rounded-xl mb-4`}>
+
+                  {/* Content */}
+                  <div className="relative p-8 backdrop-blur-sm border border-cyan-500/20 rounded-2xl hover:border-cyan-500/40 transition-all h-full">
+                    <div
+                      className={`inline-flex p-4 bg-gradient-to-br ${feature.gradient} rounded-xl mb-4 shadow-lg`}
+                    >
                       <feature.icon className="w-7 h-7 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-3">{feature.title}</h3>
-                    <p className="text-gray-400 leading-relaxed">{feature.description}</p>
+                    <h3 className="text-2xl font-bold text-white mb-3">
+                      {feature.title}
+                    </h3>
+                    <p className="text-gray-300 leading-relaxed">
+                      {feature.description}
+                    </p>
                     <div className="mt-6 flex items-center text-cyan-400 font-semibold group-hover:translate-x-2 transition-transform">
                       <span>Explore</span>
                       <ArrowRight className="w-5 h-5 ml-2" />
@@ -354,7 +571,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section - Visit Us with BG Image */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black">
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -363,13 +580,22 @@ const Home = () => {
             viewport={{ once: true }}
             className="relative overflow-hidden rounded-3xl"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-600/90 to-pink-600/90 backdrop-blur-xl"></div>
+            {/* Background Image */}
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: "url(/34.jpg)" }} // Replace with actual church image
+            />
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-600/95 via-purple-600/90 to-pink-600/95 backdrop-blur-sm"></div>
+
+            {/* Content */}
             <div className="relative p-12 text-center">
               <h2 className="text-4xl font-bold text-white mb-4">
                 {t.home.visitUs}
               </h2>
               <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
-                Join us this Sunday at 10:00 AM for worship, fellowship, and powerful teaching from God's Word.
+                Join us this Sunday at 10:00 AM for worship, fellowship, and
+                powerful teaching from God's Word.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link to="/contact">

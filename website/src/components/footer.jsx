@@ -44,9 +44,19 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative bg-black border-t border-cyan-500/20">
+    <footer className="relative bg-black border-t border-cyan-500/20 overflow-hidden">
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0">
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-50"
+          style={{ backgroundImage: 'url(/12.jpg)' }} // Replace with actual church image
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/75 to-black"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-950/30 via-transparent to-pink-950/30"></div>
+      </div>
+
       {/* Main Footer Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand Column */}
           <div>
@@ -173,7 +183,7 @@ const Footer = () => {
               <input
                 type="email"
                 placeholder="Your email address"
-                className="flex-1 px-4 py-3 bg-white/5 border border-cyan-500/20 rounded-lg text-white text-sm placeholder-gray-500 focus:border-cyan-500/40 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all"
+                className="flex-1 px-4 py-3 bg-white/5 border border-cyan-500/20 rounded-lg text-white text-sm placeholder-gray-500 focus:border-cyan-500/40 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all backdrop-blur-sm"
               />
               <motion.button
                 type="submit"
@@ -190,7 +200,7 @@ const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-cyan-500/10">
+      <div className="relative z-10 border-t border-cyan-500/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
             <p className="text-gray-500 text-sm text-center sm:text-left">

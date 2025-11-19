@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, Globe, Radio } from 'lucide-react';
+import { Menu, X, ChevronDown, Globe, Radio, ChevronRight } from 'lucide-react';
 import { useLanguage } from './lunguageContext';
 
 const Navbar = () => {
@@ -154,7 +154,7 @@ const Navbar = () => {
 
       {/* Mobile Language Dropdown */}
       <AnimatePresence>
-        {langDropdown && (
+        {langDropdown && !isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
@@ -184,39 +184,48 @@ const Navbar = () => {
         )}
       </AnimatePresence>
 
-      {/* Mobile Navigation Menu */}
+      {/* Mobile Navigation Menu - Full Screen */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-black/95 backdrop-blur-xl border-t border-cyan-500/20"
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'tween', duration: 0.3 }}
+            className="lg:hidden fixed inset-0 top-20 bg-black/98 backdrop-blur-xl z-40"
           >
-            <div className="px-4 pt-2 pb-4 space-y-1">
-              {navItems.map((item, index) => (
-                <Link
-                  key={index}
-                  to={item.to}
-                  onClick={() => setIsOpen(false)}
-                  className={`block px-4 py-3 rounded-lg transition-colors ${
-                    location.pathname === item.to
-                      ? 'bg-cyan-500/20 text-cyan-400'
-                      : 'text-gray-300 hover:bg-cyan-500/10'
-                  }`}
-                >
-                  {item.label}
+            <div className="h-full overflow-y-auto px-6 py-8">
+              <div className="space-y-2">
+                {navItems.map((item, index) => (
+                  <Link
+                    key={index}
+                    to={item.to}
+                    onClick={() => setIsOpen(false)}
+                    className={`flex items-center justify-between px-6 py-4 rounded-xl transition-all ${
+                      location.pathname === item.to
+                        ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30'
+                        : 'text-gray-300 hover:bg-cyan-500/10 border border-transparent'
+                    }`}
+                  >
+                    <span className="text-lg font-medium">{item.label}</span>
+                    <ChevronRight className="w-5 h-5" />
+                  </Link>
+                ))}
+                
+                {/* Watch Live Button */}
+                <Link to="/sermons" onClick={() => setIsOpen(false)}>
+                  <motion.button
+                    whileTap={{ scale: 0.95 }}
+                    className="w-full mt-6 px-6 py-4 bg-gradient-to-r from-cyan-500 to-pink-500 text-white rounded-xl font-medium shadow-lg flex items-center justify-between"
+                  >
+                    <span className="flex items-center space-x-3">
+                      <Radio className="w-5 h-5" />
+                      <span className="text-lg">{t.nav.watchLive}</span>
+                    </span>
+                    <ChevronRight className="w-5 h-5" />
+                  </motion.button>
                 </Link>
-              ))}
-              <Link to="/sermons" onClick={() => setIsOpen(false)}>
-                <motion.button
-                  whileTap={{ scale: 0.95 }}
-                  className="w-full mt-4 px-4 py-3 bg-gradient-to-r from-cyan-500 to-pink-500 text-white rounded-lg font-medium shadow-lg flex items-center justify-center space-x-2"
-                >
-                  <Radio className="w-4 h-4" />
-                  <span>{t.nav.watchLive}</span>
-                </motion.button>
-              </Link>
+              </div>
             </div>
           </motion.div>
         )}
