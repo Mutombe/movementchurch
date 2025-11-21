@@ -90,7 +90,7 @@ const About = () => {
         {/* Background Image with Overlay */}
         <div className="absolute inset-0">
           <img 
-            src="/50.jpg" 
+            src="/3.jpg" 
             alt="Community" 
             className="w-full h-full object-cover"
           />
