@@ -9,6 +9,9 @@ import Sermons from "./components/sermons";
 import Events from "./components/events";
 import Ministries from "./components/ministries";
 import Give from "./components/give";
+import Resources from "./components/resources";
+import Blogs from "./components/blog";
+import Gallery from "./components/gallery";
 import Contact from "./components/contact";
 import GetInvolved from "./components/getInvolved";
 import Footer from "./components/footer";
@@ -87,6 +90,9 @@ function App() {
             <Route path="/events" element={<Events />} />
             <Route path="/ministries" element={<Ministries />} />
             <Route path="/give" element={<Give />} />
+            <Route path="/resources" element={<Resources />} />
+            <Route path="/blog" element={<Blogs />} />
+            <Route path="/gallery" element={<Gallery />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/get-involved" element={<GetInvolved />} />
           </Routes>

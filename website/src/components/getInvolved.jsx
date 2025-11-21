@@ -11,6 +11,8 @@ import {
   ArrowRight,
   CheckCircle
 } from 'lucide-react';
+import { GiWorld } from "react-icons/gi";
+import { LiaPeopleCarrySolid } from "react-icons/lia";
 
 const GetInvolved = () => {
   const { t } = useLanguage();
@@ -25,7 +27,7 @@ const GetInvolved = () => {
       features: ['Flexible Schedule', 'Training Provided', 'Make an Impact', 'Meet New People'],
     },
     {
-      icon: Users,
+      icon: LiaPeopleCarrySolid,
       title: t.getInvolved.smallGroups,
       description: t.getInvolved.smallGroupsText,
       cta: t.getInvolved.learnMore,
@@ -57,7 +59,7 @@ const GetInvolved = () => {
       features: ['Multiple Teams', 'Use Your Gifts', 'Build Skills', 'Serve Weekly'],
     },
     {
-      icon: Globe,
+      icon: GiWorld,
       title: t.getInvolved.missions,
       description: 'Experience missions firsthand and share God\'s love globally.',
       cta: t.getInvolved.learnMore,
@@ -78,7 +80,7 @@ const GetInvolved = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="inline-block px-4 py-2 bg-red-500/20 border border-red-500/30 rounded-full mb-6">
+            <div className="inline-block px-4 py-2 bg-red-500/20 border border-red-500/30 rounded-sm mb-6">
               <span className="text-red-400 text-sm font-medium">{t.getInvolved.subtitle}</span>
             </div>
             <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-white mb-6">
@@ -97,13 +99,13 @@ const GetInvolved = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            className="relative overflow-hidden rounded-3xl"
+            className="relative overflow-hidden rounded-sm"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-yellow-600/90 to-red-600/90 backdrop-blur-xl"></div>
             <div className="relative grid md:grid-cols-2 gap-8 p-12 items-center">
               {/* Content */}
               <div>
-                <div className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full mb-4">
+                <div className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-sm mb-4">
                   <span className="text-white text-sm font-bold">START HERE</span>
                 </div>
                 <h2 className="text-4xl font-bold text-white mb-4">
@@ -123,7 +125,7 @@ const GetInvolved = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 bg-white text-red-600 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all inline-flex items-center space-x-2"
+                  className="px-8 py-4 bg-white text-red-600 rounded-sm font-semibold shadow-lg hover:shadow-xl transition-all inline-flex items-center space-x-2"
                 >
                   <span>Register for Next Class</span>
                   <ArrowRight className="w-5 h-5" />
@@ -137,9 +139,9 @@ const GetInvolved = () => {
                   transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                   className="relative"
                 >
-                  <div className="absolute inset-0 bg-white/20 rounded-3xl blur-2xl"></div>
-                  <div className="relative p-12 bg-white/10 backdrop-blur-sm rounded-3xl border-4 border-white/30">
-                    <Users className="w-32 h-32 text-white" />
+                  <div className="absolute inset-0 bg-white/20 rounded-sm blur-2xl"></div>
+                  <div className="relative p-12 bg-white/10 backdrop-blur-sm rounded-sm border-4 border-white/30">
+                    <LiaPeopleCarrySolid className="w-32 h-32 text-white" />
                   </div>
                 </motion.div>
               </div>
@@ -169,12 +171,12 @@ const GetInvolved = () => {
                 whileHover={{ y: -10 }}
                 className="relative group h-full"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-yellow-600/20 to-red-600/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-all"></div>
-                <div className="relative h-full flex flex-col bg-white/5 backdrop-blur-xl border border-yellow-500/20 rounded-2xl hover:border-yellow-500/40 transition-all overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-yellow-600/20 to-red-600/20 rounded-sm blur-xl opacity-0 group-hover:opacity-100 transition-all"></div>
+                <div className="relative h-full flex flex-col bg-white/5 backdrop-blur-xl border border-yellow-500/20 rounded-sm hover:border-yellow-500/40 transition-all overflow-hidden">
                   {/* Header */}
                   <div className={`p-6 bg-gradient-to-r ${opportunity.gradient}`}>
                     <div className="flex items-center justify-between mb-4">
-                      <div className="p-3 bg-white/20 backdrop-blur-sm rounded-lg">
+                      <div className="p-3 bg-white/20 backdrop-blur-sm rounded-sm">
                         <opportunity.icon className="w-7 h-7 text-white" />
                       </div>
                     </div>
@@ -187,7 +189,7 @@ const GetInvolved = () => {
                     <div className="space-y-2 mb-6">
                       {opportunity.features.map((feature, i) => (
                         <div key={i} className="flex items-center space-x-2 text-gray-300">
-                          <div className="w-1.5 h-1.5 bg-yellow-500 rounded-full"></div>
+                          <div className="w-1.5 h-1.5 bg-yellow-500 rounded-sm"></div>
                           <span className="text-sm">{feature}</span>
                         </div>
                       ))}
@@ -196,7 +198,7 @@ const GetInvolved = () => {
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="w-full py-3 bg-gradient-to-r from-yellow-500 to-red-600 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all flex items-center justify-center space-x-2"
+                      className="w-full py-3 bg-gradient-to-r from-yellow-500 to-red-600 text-white rounded-sm font-semibold shadow-lg hover:shadow-xl transition-all flex items-center justify-center space-x-2"
                     >
                       <span>{opportunity.cta}</span>
                       <ArrowRight className="w-4 h-4" />
@@ -237,8 +239,8 @@ const GetInvolved = () => {
                 {index < 3 && (
                   <div className="hidden md:block absolute top-8 left-full w-full h-0.5 bg-gradient-to-r from-yellow-500 to-red-600 opacity-30"></div>
                 )}
-                <div className="relative p-6 bg-white/5 backdrop-blur-xl border border-yellow-500/20 rounded-2xl text-center">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-yellow-500 to-red-600 rounded-full mb-4 text-2xl font-bold text-white">
+                <div className="relative p-6 bg-white/5 backdrop-blur-xl border border-yellow-500/20 rounded-sm text-center">
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-yellow-500 to-red-600 rounded-sm mb-4 text-2xl font-bold text-white">
                     {item.step}
                   </div>
                   <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
@@ -269,14 +271,14 @@ const GetInvolved = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-gradient-to-r from-yellow-500 to-red-600 text-white rounded-lg font-semibold shadow-lg"
+                className="px-8 py-4 bg-gradient-to-r from-yellow-500 to-red-600 text-white rounded-sm font-semibold shadow-lg"
               >
                 Contact Us Today
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-white/10 backdrop-blur-sm border border-yellow-500/50 text-white rounded-lg font-semibold hover:bg-white/20 transition-all"
+                className="px-8 py-4 bg-white/10 backdrop-blur-sm border border-yellow-500/50 text-white rounded-sm font-semibold hover:bg-white/20 transition-all"
               >
                 Download Info Packet
               </motion.button>

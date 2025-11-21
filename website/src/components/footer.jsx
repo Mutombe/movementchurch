@@ -79,7 +79,7 @@ const Footer = () => {
                   href={social.href}
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`p-2 bg-white/5 border border-cyan-500/20 rounded-lg hover:border-cyan-500/40 transition-all ${social.color}`}
+                  className={`p-2 bg-white/5 border border-cyan-500/20 rounded-sm hover:border-cyan-500/40 transition-all ${social.color}`}
                   aria-label={social.label}
                 >
                   <social.icon className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
@@ -183,13 +183,13 @@ const Footer = () => {
               <input
                 type="email"
                 placeholder="Your email address"
-                className="flex-1 px-4 py-3 bg-white/5 border border-cyan-500/20 rounded-lg text-white text-sm placeholder-gray-500 focus:border-cyan-500/40 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all backdrop-blur-sm"
+                className="flex-1 px-4 py-3 bg-white/5 border border-cyan-500/20 rounded-sm text-white text-sm placeholder-gray-500 focus:border-cyan-500/40 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all backdrop-blur-sm"
               />
               <motion.button
                 type="submit"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-pink-500 text-white rounded-lg font-medium shadow-lg inline-flex items-center justify-center space-x-2"
+                className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-pink-500 text-white rounded-sm font-medium shadow-lg inline-flex items-center justify-center space-x-2"
               >
                 <span>{t.footer.subscribe}</span>
                 <Send className="w-4 h-4" />
@@ -229,7 +229,7 @@ const Footer = () => {
         onClick={scrollToTop}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        className="fixed bottom-8 right-8 p-3 bg-gradient-to-br from-cyan-500 to-pink-500 text-white rounded-full shadow-lg hover:shadow-cyan-500/50 transition-all z-40"
+        className="fixed bottom-8 right-8 p-3 bg-gradient-to-br from-cyan-500 to-pink-500 text-white rounded-sm shadow-lg hover:shadow-cyan-500/50 transition-all z-40"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1 }}

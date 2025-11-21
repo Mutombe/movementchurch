@@ -16,7 +16,9 @@ import {
   Award,
   Globe2,
 } from "lucide-react";
+import { GiWorld } from "react-icons/gi";
 import { useCountUp } from "./useCountUp";
+import { LiaPeopleCarrySolid } from "react-icons/lia";
 
 // Count Up Component
 const CountUpStat = ({ end, suffix = "", inView }) => {
@@ -54,7 +56,7 @@ const Home = () => {
 
   const stats = [
     {
-      icon: Users,
+      icon: LiaPeopleCarrySolid,
       value: 500,
       suffix: "+",
       label: "Members",
@@ -78,7 +80,7 @@ const Home = () => {
       size: "small",
     },
     {
-      icon: Globe2,
+      icon: GiWorld,
       value: 3,
       suffix: "",
       label: "Communities",
@@ -117,7 +119,7 @@ const Home = () => {
 
           {/* Animated Gradient Orbs */}
           <motion.div
-            className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl"
+            className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/20 rounded-sm blur-3xl"
             animate={{
               scale: [1, 1.2, 1],
               opacity: [0.3, 0.5, 0.3],
@@ -129,7 +131,7 @@ const Home = () => {
             }}
           />
           <motion.div
-            className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pink-600/20 rounded-full blur-3xl"
+            className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pink-600/20 rounded-sm blur-3xl"
             animate={{
               scale: [1.2, 1, 1.2],
               opacity: [0.5, 0.3, 0.5],
@@ -148,7 +150,7 @@ const Home = () => {
               <button
                 key={index}
                 onClick={() => setCurrentImageIndex(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                className={`w-2 h-2 rounded-sm transition-all duration-300 ${
                   index === currentImageIndex
                     ? "bg-cyan-400 w-8"
                     : "bg-white/30 hover:bg-white/50"
@@ -166,7 +168,7 @@ const Home = () => {
           >
             {/* Live Badge 
             <motion.div
-              className="inline-flex items-center space-x-2 px-4 py-2 bg-pink-600/20 border border-pink-500/30 rounded-full mb-6 backdrop-blur-sm"
+              className="inline-flex items-center space-x-2 px-4 py-2 bg-pink-600/20 border border-pink-500/30 rounded-sm mb-6 backdrop-blur-sm"
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
@@ -196,7 +198,7 @@ const Home = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="group px-8 py-4 bg-gradient-to-r from-cyan-500 to-pink-500 text-white rounded-lg font-semibold shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 transition-all flex items-center space-x-2"
+                  className="group px-8 py-4 bg-gradient-to-r from-cyan-500 to-pink-500 text-white rounded-sm font-semibold shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 transition-all flex items-center space-x-2"
                 >
                   <span>{t.home.joinUs}</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -206,7 +208,7 @@ const Home = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 bg-white/10 backdrop-blur-sm border border-cyan-500/50 text-white rounded-lg font-semibold hover:bg-white/20 transition-all flex items-center space-x-2"
+                  className="px-8 py-4 bg-white/10 backdrop-blur-sm border border-cyan-500/50 text-white rounded-sm font-semibold hover:bg-white/20 transition-all flex items-center space-x-2"
                 >
                   <Play className="w-5 h-5" />
                   <span>{t.home.watchOnline}</span>
@@ -220,9 +222,9 @@ const Home = () => {
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              <div className="w-6 h-10 border-2 border-cyan-500/50 rounded-full flex justify-center">
+              <div className="w-6 h-10 border-2 border-cyan-500/50 rounded-sm flex justify-center">
                 <motion.div
-                  className="w-1.5 h-1.5 bg-cyan-400 rounded-full mt-2"
+                  className="w-1.5 h-1.5 bg-cyan-400 rounded-sm mt-2"
                   animate={{ y: [0, 16, 0] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
@@ -234,7 +236,7 @@ const Home = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="inline-flex flex-col sm:flex-row items-center gap-6 p-6 bg-white/5 backdrop-blur-xl border border-cyan-500/20 rounded-2xl"
+              className="inline-flex flex-col sm:flex-row items-center gap-6 p-6 bg-white/5 backdrop-blur-xl border border-cyan-500/20 rounded-sm"
             >
               <div className="flex items-center space-x-3">
                 <Clock className="w-5 h-5 text-cyan-400" />
@@ -264,7 +266,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Stats Section - Bento Grid Layout */}
+{/* Stats Section - Bento Grid Layout */}
       <section
         ref={statsRef}
         className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black via-purple-950/10 to-black"
@@ -277,35 +279,35 @@ const Home = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={isStatsInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6 }}
-              className="col-span-4 md:col-span-2 row-span-2 relative group overflow-hidden rounded-3xl"
+              className="col-span-4 md:col-span-2 row-span-2 relative group overflow-hidden rounded-sm"
             >
-              {/* Background Image */}
+              {/* Background Image - More Visible */}
               <div
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                style={{ backgroundImage: "url(/1.jpg)", opacity: 0.5 }} // Replace with your church image
+                style={{ backgroundImage: "url(/46.jpg)" }}
               />
-              {/* Dark Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-black/75 via-black/80 to-black/85 group-hover:from-black/80 group-hover:via-black/75 group-hover:to-black/80 transition-all"></div>
-              {/* Gradient Accent */}
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-600/50 to-pink-600/50 rounded-3xl blur-2xl group-hover:blur-3xl transition-all"></div>
+              {/* Lighter Dark Overlay for More Image Visibility */}
+              <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/50 to-black/60 group-hover:from-black/30 group-hover:via-black/40 group-hover:to-black/50 transition-all"></div>
+              {/* Subtle Gradient Accent */}
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-600/20 to-pink-600/20 rounded-sm blur-xl group-hover:blur-2xl transition-all"></div>
 
-              <div className="relative h-full p-8 md:p-10 backdrop-blur-sm border border-cyan-500/20 rounded-3xl hover:border-cyan-500/40 transition-all flex flex-col justify-between">
+              <div className="relative h-full p-8 md:p-10 backdrop-blur-[2px] border border-white/20 rounded-sm hover:border-white/30 transition-all flex flex-col justify-between">
                 <div
-                  className={`inline-flex p-6 bg-gradient-to-br ${stats[0].color} rounded-2xl w-fit mb-6 shadow-lg`}
+                  className={`inline-flex p-6 bg-gradient-to-br ${stats[0].color} rounded-sm w-fit mb-6 shadow-lg`}
                 >
                   {React.createElement(stats[0].icon, {
                     className: "w-10 h-10 md:w-12 md:h-12 text-white",
                   })}
                 </div>
                 <div>
-                  <div className="text-5xl md:text-7xl font-bold text-white mb-4">
+                  <div className="text-5xl md:text-7xl font-bold text-white mb-4 drop-shadow-lg">
                     <CountUpStat
                       end={stats[0].value}
                       suffix={stats[0].suffix}
                       inView={isStatsInView}
                     />
                   </div>
-                  <div className="text-gray-300 text-lg md:text-xl font-medium">
+                  <div className="text-white/95 text-lg md:text-xl font-medium drop-shadow-md">
                     {stats[0].label}
                   </div>
                 </div>
@@ -317,33 +319,33 @@ const Home = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={isStatsInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="col-span-4 md:col-span-2 relative group overflow-hidden rounded-2xl"
+              className="col-span-4 md:col-span-2 relative group overflow-hidden rounded-sm"
             >
-              {/* Background Image */}
+              {/* Background Image - More Visible */}
               <div
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                style={{ backgroundImage: "url(/6.jpg)" }} // Replace with your church image
+                style={{ backgroundImage: "url(/2.jpg)" }}
               />
-              {/* Dark Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/80 to-black/85 group-hover:from-black/80 group-hover:via-black/75 group-hover:to-black/80 transition-all"></div>
-              {/* Gradient Accent */}
-              <div className="absolute inset-0 bg-gradient-to-br from-pink-600/50 to-purple-600/50 rounded-2xl blur-xl group-hover:blur-2xl transition-all"></div>
+              {/* Lighter Dark Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/50 to-black/60 group-hover:from-black/30 group-hover:via-black/40 group-hover:to-black/50 transition-all"></div>
+              {/* Subtle Gradient Accent */}
+              <div className="absolute inset-0 bg-gradient-to-br from-pink-600/20 to-purple-600/20 rounded-sm blur-xl group-hover:blur-2xl transition-all"></div>
 
-              <div className="relative p-6 md:p-8 backdrop-blur-sm border border-cyan-500/20 rounded-2xl hover:border-cyan-500/40 transition-all h-full flex items-center justify-between">
+              <div className="relative p-6 md:p-8 backdrop-blur-[2px] border border-white/20 rounded-sm hover:border-white/30 transition-all h-full flex items-center justify-between">
                 <div>
-                  <div className="text-3xl md:text-5xl font-bold text-white mb-2">
+                  <div className="text-3xl md:text-5xl font-bold text-white mb-2 drop-shadow-lg">
                     <CountUpStat
                       end={stats[1].value}
                       suffix={stats[1].suffix}
                       inView={isStatsInView}
                     />
                   </div>
-                  <div className="text-gray-300 text-sm md:text-base font-medium">
+                  <div className="text-white/95 text-sm md:text-base font-medium drop-shadow-md">
                     {stats[1].label}
                   </div>
                 </div>
                 <div
-                  className={`p-4 bg-gradient-to-br ${stats[1].color} rounded-xl shadow-lg`}
+                  className={`p-4 bg-gradient-to-br ${stats[1].color} rounded-sm shadow-lg`}
                 >
                   {React.createElement(stats[1].icon, {
                     className: "w-6 h-6 md:w-8 md:h-8 text-white",
@@ -357,28 +359,28 @@ const Home = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={isStatsInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="col-span-2 md:col-span-1 relative group overflow-hidden rounded-2xl"
+              className="col-span-2 md:col-span-1 relative group overflow-hidden rounded-sm"
             >
-              {/* Background Image */}
+              {/* Background Image - More Visible */}
               <div
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                style={{ backgroundImage: "url(/16.jpg)" }} // Replace with your church image
+                style={{ backgroundImage: "url(/29.jpg)" }}
               />
-              {/* Dark Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/80 to-black/85 group-hover:from-black/80 group-hover:via-black/75 group-hover:to-black/80 transition-all"></div>
-              {/* Gradient Accent */}
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-600/20 to-pink-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all"></div>
+              {/* Lighter Dark Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/50 to-black/60 group-hover:from-black/30 group-hover:via-black/40 group-hover:to-black/50 transition-all"></div>
+              {/* Subtle Gradient Accent */}
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-600/15 to-pink-600/15 rounded-sm blur-lg group-hover:blur-xl transition-all"></div>
 
-              <div className="relative p-6 backdrop-blur-sm border border-cyan-500/20 rounded-2xl hover:border-cyan-500/40 transition-all h-full flex flex-col justify-between">
+              <div className="relative p-6 backdrop-blur-[2px] border border-white/20 rounded-sm hover:border-white/30 transition-all h-full flex flex-col justify-between">
                 <div
-                  className={`inline-flex p-3 bg-gradient-to-br ${stats[3].color} rounded-xl w-fit mb-4 shadow-lg`}
+                  className={`inline-flex p-3 bg-gradient-to-br ${stats[3].color} rounded-sm w-fit mb-4 shadow-lg`}
                 >
                   {React.createElement(stats[3].icon, {
                     className: "w-5 h-5 text-white",
                   })}
                 </div>
                 <div>
-                  <div className="text-3xl md:text-4xl font-bold text-white mb-2">
+                  <div className="text-3xl md:text-4xl font-bold text-white mb-2 drop-shadow-lg">
                     <CountUpStat
                       end={stats[3].value}
                       suffix={stats[3].suffix}
@@ -386,7 +388,7 @@ const Home = () => {
                     />
                   </div>
                   {/* Mobile: Show abbreviated text, Desktop: Show full text */}
-                  <div className="text-gray-300 text-xs md:text-sm font-medium">
+                  <div className="text-white/95 text-xs md:text-sm font-medium drop-shadow-md">
                     <span className="md:hidden">Groups</span>
                     <span className="hidden md:inline">{stats[3].label}</span>
                   </div>
@@ -399,35 +401,35 @@ const Home = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={isStatsInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="col-span-2 md:col-span-1 relative group overflow-hidden rounded-2xl"
+              className="col-span-2 md:col-span-1 relative group overflow-hidden rounded-sm"
             >
-              {/* Background Image */}
+              {/* Background Image - More Visible */}
               <div
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                style={{ backgroundImage: "url(/34.jpg)" }} // Replace with your church image
+                style={{ backgroundImage: "url(/34.jpg)" }}
               />
-              {/* Dark Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/80 to-black/85 group-hover:from-black/80 group-hover:via-black/75 group-hover:to-black/80 transition-all"></div>
-              {/* Gradient Accent */}
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-600/20 to-pink-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all"></div>
+              {/* Lighter Dark Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/50 to-black/60 group-hover:from-black/30 group-hover:via-black/40 group-hover:to-black/50 transition-all"></div>
+              {/* Subtle Gradient Accent */}
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-600/15 to-pink-600/15 rounded-sm blur-lg group-hover:blur-xl transition-all"></div>
 
-              <div className="relative p-6 backdrop-blur-sm border border-cyan-500/20 rounded-2xl hover:border-cyan-500/40 transition-all h-full flex flex-col justify-between">
+              <div className="relative p-6 backdrop-blur-[2px] border border-white/20 rounded-sm hover:border-white/30 transition-all h-full flex flex-col justify-between">
                 <div
-                  className={`inline-flex p-3 bg-gradient-to-br ${stats[2].color} rounded-xl w-fit mb-4 shadow-lg`}
+                  className={`inline-flex p-3 bg-gradient-to-br ${stats[2].color} rounded-sm w-fit mb-4 shadow-lg`}
                 >
                   {React.createElement(stats[2].icon, {
                     className: "w-5 h-5 text-white",
                   })}
                 </div>
                 <div>
-                  <div className="text-3xl md:text-4xl font-bold text-white mb-2">
+                  <div className="text-3xl md:text-4xl font-bold text-white mb-2 drop-shadow-lg">
                     <CountUpStat
                       end={stats[2].value}
                       suffix={stats[2].suffix}
                       inView={isStatsInView}
                     />
                   </div>
-                  <div className="text-gray-300 text-xs md:text-sm font-medium">
+                  <div className="text-white/95 text-xs md:text-sm font-medium drop-shadow-md">
                     {stats[2].label}
                   </div>
                 </div>
@@ -448,11 +450,15 @@ const Home = () => {
               viewport={{ once: true }}
               className="relative"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-pink-600/20 rounded-3xl blur-2xl"></div>
-              <div className="relative aspect-square rounded-3xl overflow-hidden border border-cyan-500/20">
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-pink-600/20 rounded-sm blur-2xl"></div>
+              <div className="relative aspect-square rounded-sm overflow-hidden border border-cyan-500/20">
                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-pink-600/10 backdrop-blur-sm"></div>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <BookOpen className="w-24 h-24 text-cyan-400/50" />
+                  <img
+                    src="/1.jpg" // Replace with your church image
+                    alt="Church Image"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
             </motion.div>
@@ -463,7 +469,7 @@ const Home = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <div className="inline-block px-4 py-2 bg-cyan-500/20 border border-cyan-500/30 rounded-full mb-4">
+              <div className="inline-block px-4 py-2 bg-cyan-500/20 border border-cyan-500/30 rounded-sm mb-4">
                 <span className="text-cyan-400 text-sm font-medium">
                   {t.home.ourMission}
                 </span>
@@ -478,7 +484,7 @@ const Home = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-pink-500 text-white rounded-lg font-semibold shadow-lg"
+                  className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-pink-500 text-white rounded-sm font-semibold shadow-lg"
                 >
                   Learn More About Us
                 </motion.button>
@@ -503,7 +509,7 @@ const Home = () => {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                icon: Users,
+                icon: LiaPeopleCarrySolid,
                 title: "Join a Ministry",
                 description: "Find your place to serve and grow in faith",
                 link: "/ministries",
@@ -534,7 +540,7 @@ const Home = () => {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ y: -10 }}
-                  className="relative group h-full overflow-hidden rounded-2xl"
+                  className="relative group h-full overflow-hidden rounded-sm"
                 >
                   {/* Background Image with Overlay */}
                   <div
@@ -544,12 +550,12 @@ const Home = () => {
                   <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-black/85 to-black/90 group-hover:from-black/85 group-hover:via-black/80 group-hover:to-black/85 transition-all"></div>
 
                   {/* Gradient Blur Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-600/20 to-pink-600/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-all"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-600/20 to-pink-600/20 rounded-sm blur-xl opacity-0 group-hover:opacity-100 transition-all"></div>
 
                   {/* Content */}
-                  <div className="relative p-8 backdrop-blur-sm border border-cyan-500/20 rounded-2xl hover:border-cyan-500/40 transition-all h-full">
+                  <div className="relative p-8 backdrop-blur-sm border border-cyan-500/20 rounded-sm hover:border-cyan-500/40 transition-all h-full">
                     <div
-                      className={`inline-flex p-4 bg-gradient-to-br ${feature.gradient} rounded-xl mb-4 shadow-lg`}
+                      className={`inline-flex p-4 bg-gradient-to-br ${feature.gradient} rounded-sm mb-4 shadow-lg`}
                     >
                       <feature.icon className="w-7 h-7 text-white" />
                     </div>
@@ -578,7 +584,7 @@ const Home = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative overflow-hidden rounded-3xl"
+            className="relative overflow-hidden rounded-sm"
           >
             {/* Background Image */}
             <div
@@ -602,7 +608,7 @@ const Home = () => {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="px-8 py-4 bg-white text-pink-600 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all"
+                    className="px-8 py-4 bg-white text-pink-600 rounded-sm font-semibold shadow-lg hover:shadow-xl transition-all"
                   >
                     Get Directions
                   </motion.button>
@@ -611,7 +617,7 @@ const Home = () => {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white text-white rounded-lg font-semibold hover:bg-white/20 transition-all"
+                    className="px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white text-white rounded-sm font-semibold hover:bg-white/20 transition-all"
                   >
                     Plan Your Visit
                   </motion.button>

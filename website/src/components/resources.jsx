@@ -2,137 +2,159 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from './lunguageContext';
 import { 
-  Calendar, 
-  MapPin, 
-  Clock, 
-  Users, 
-  ArrowRight, 
-  Plus,
+  BookOpen, 
+  Download, 
+  Headphones, 
+  Video, 
+  FileText, 
+  Music, 
+  ArrowRight,
+  Search,
   Filter,
-  ChevronRight,
+  Play,
+  Eye,
   Heart,
   Share2,
-  Bell
+  Clock,
+  CheckCircle
 } from 'lucide-react';
-import { LiaPeopleCarrySolid } from "react-icons/lia";
 
-const Events = () => {
+const Resources = () => {
   const { t } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchTerm, setSearchTerm] = useState('');
 
-  const upcomingEvents = [
+  const resources = [
     {
       id: 1,
-      title: 'Sunday Worship Service',
-      date: 'Every Sunday',
-      time: '10:00 AM',
-      location: 'Main Sanctuary',
-      description: 'Join us for powerful worship, inspiring messages, and fellowship with believers from all walks of life.',
-      attendees: '200+',
-      category: 'Worship',
+      title: 'Complete Bible Study Guide',
+      description: 'Comprehensive study materials covering all 66 books of the Bible with questions and reflections',
+      category: 'Study Guides',
+      type: 'PDF',
+      icon: BookOpen,
+      image: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=800&q=80',
+      downloads: 1250,
       gradient: 'from-cyan-500 to-pink-500',
-      image: 'https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=800&q=80',
       featured: true,
     },
     {
       id: 2,
-      title: 'Zumba with Mom',
-      date: 'Every Saturday',
-      time: '8:00 - 9:30 AM',
-      location: 'MMC, Cnr 4th & Masotcha Ndlovhu Ave',
-      description: 'Zumba, Games, Free Basic Health Checks & Healthier Living Tips. A fun way to stay healthy!',
-      attendees: '50+',
-      category: 'Community',
+      title: 'Prayer & Fasting Guide',
+      description: 'A 21-day journey to deepen your relationship with God through prayer and fasting',
+      category: 'Devotionals',
+      type: 'PDF',
+      icon: FileText,
+      image: 'https://images.unsplash.com/photo-1507692049790-de58290a4334?w=800&q=80',
+      downloads: 890,
       gradient: 'from-pink-500 to-purple-500',
-      image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&q=80',
       featured: true,
     },
     {
       id: 3,
-      title: 'Youth Night',
-      date: 'March 15, 2025',
-      time: '6:00 PM',
-      location: 'Youth Center',
-      description: 'An evening of worship, games, and teaching designed specifically for young people to grow in faith.',
-      attendees: '80+',
-      category: 'Youth',
+      title: 'Worship Sessions Podcast',
+      description: 'Weekly podcast featuring worship music, teaching, and interviews with worship leaders',
+      category: 'Podcasts',
+      type: 'Audio',
+      icon: Headphones,
+      image: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80',
+      downloads: 2100,
       gradient: 'from-cyan-400 to-pink-500',
-      image: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800&q=80',
     },
     {
       id: 4,
-      title: 'Prayer & Fasting',
-      date: 'March 20-22, 2025',
-      time: 'All Day',
-      location: 'Church Campus',
-      description: 'Three days of corporate prayer and fasting for spiritual breakthrough and revival in our community.',
-      attendees: '150+',
-      category: 'Prayer',
+      title: 'Sermon Notes Template',
+      description: 'Beautiful templates to help you take notes during sermons and apply God\'s Word',
+      category: 'Templates',
+      type: 'PDF',
+      icon: FileText,
+      image: 'https://images.unsplash.com/photo-1516307365426-bea591f05011?w=800&q=80',
+      downloads: 650,
       gradient: 'from-pink-600 to-purple-600',
-      image: 'https://images.unsplash.com/photo-1507692049790-de58290a4334?w=800&q=80',
     },
     {
       id: 5,
-      title: 'Community Outreach',
-      date: 'March 25, 2025',
-      time: '9:00 AM',
-      location: 'Parktown Community',
-      description: 'Serving our community with love through practical acts of kindness, food distribution, and support.',
-      attendees: '100+',
-      category: 'Outreach',
+      title: 'Marriage Enrichment Series',
+      description: '8-week video series on building strong, Christ-centered marriages',
+      category: 'Video Series',
+      type: 'Video',
+      icon: Video,
+      image: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&q=80',
+      downloads: 430,
       gradient: 'from-cyan-500 to-pink-500',
-      image: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&q=80',
     },
     {
       id: 6,
-      title: 'Easter Celebration',
-      date: 'April 20, 2025',
-      time: '10:00 AM',
-      location: 'Main Sanctuary',
-      description: 'Celebrate the resurrection of Jesus Christ with special music, dramatic presentations, and powerful message.',
-      attendees: '300+',
-      category: 'Special',
+      title: 'Worship Playlist',
+      description: 'Curated collection of our favorite worship songs for your personal devotion',
+      category: 'Music',
+      type: 'Audio',
+      icon: Music,
+      image: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&q=80',
+      downloads: 1800,
       gradient: 'from-pink-500 to-cyan-400',
-      image: 'https://images.unsplash.com/photo-1516307365426-bea591f05011?w=800&q=80',
+    },
+    {
+      id: 7,
+      title: 'Small Group Leader Guide',
+      description: 'Everything you need to lead an effective small group ministry',
+      category: 'Study Guides',
+      type: 'PDF',
+      icon: BookOpen,
+      image: 'https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=800&q=80',
+      downloads: 520,
+      gradient: 'from-cyan-600 to-pink-600',
+    },
+    {
+      id: 8,
+      title: 'Youth Ministry Toolkit',
+      description: 'Games, icebreakers, and teaching materials for youth leaders',
+      category: 'Templates',
+      type: 'PDF',
+      icon: FileText,
+      image: 'https://images.unsplash.com/photo-1517148815978-75f6acaaf32c?w=800&q=80',
+      downloads: 380,
+      gradient: 'from-pink-600 to-purple-500',
     },
   ];
 
-  const categories = ['all', 'Worship', 'Community', 'Youth', 'Prayer', 'Outreach', 'Special'];
+  const categories = ['all', 'Study Guides', 'Devotionals', 'Podcasts', 'Video Series', 'Music', 'Templates'];
 
-  const filteredEvents = upcomingEvents.filter(event => 
-    selectedCategory === 'all' || event.category === selectedCategory
-  );
+  const filteredResources = resources.filter(resource => {
+    const matchesSearch = resource.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         resource.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory === 'all' || resource.category === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
 
-  const featuredEvents = upcomingEvents.filter(event => event.featured);
+  const featuredResources = resources.filter(resource => resource.featured);
 
   return (
     <div className="min-h-screen bg-black pt-20">
-      {/* Hero Section with Creative Typography */}
+      {/* Hero Section */}
       <section className="relative py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        {/* Background Elements */}
+        {/* Background */}
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-500/20 rounded-sm blur-3xl"></div>
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-pink-500/20 rounded-sm blur-3xl"></div>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto">
+        <div className="relative z-10 max-w-7xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center"
           >
             <div className="inline-flex items-center gap-2 px-5 py-2 bg-white/10 backdrop-blur-md border border-cyan-500/30 rounded-sm mb-8">
-              <Calendar className="w-4 h-4 text-cyan-400" />
-              <span className="text-cyan-400 text-sm font-semibold uppercase tracking-wider">{t.events.subtitle}</span>
+              <BookOpen className="w-4 h-4 text-cyan-400" />
+              <span className="text-cyan-400 text-sm font-semibold uppercase tracking-wider">Free Resources</span>
             </div>
 
             <h1 className="text-7xl sm:text-8xl md:text-9xl font-bold text-white mb-8 leading-none">
-              {t.events.title}
+              Resources
             </h1>
 
             <p className="text-2xl text-gray-300 max-w-3xl mx-auto mb-12">
-              Connect, grow, and serve together at our upcoming events and gatherings.
+              Free study guides, devotionals, podcasts, and tools to help you grow in your faith journey.
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-4">
@@ -141,37 +163,36 @@ const Events = () => {
                 whileTap={{ scale: 0.95 }}
                 className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-pink-500 text-white rounded-sm font-bold flex items-center gap-2 shadow-2xl"
               >
-                <Calendar className="w-5 h-5" />
-                View Calendar
+                <Download className="w-5 h-5" />
+                Browse All
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-white/10 backdrop-blur-md border-2 border-white/30 text-white rounded-sm font-bold hover:bg-white/20 transition-all flex items-center gap-2"
+                className="px-8 py-4 bg-white/10 backdrop-blur-md border-2 border-white/30 text-white rounded-sm font-bold hover:bg-white/20 transition-all"
               >
-                <Bell className="w-5 h-5" />
-                Get Notifications
+                Request a Resource
               </motion.button>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Featured Events - Creative Layout */}
+      {/* Featured Resources */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black via-purple-950/10 to-black">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-1 h-10 bg-gradient-to-b from-cyan-500 to-pink-500 rounded-sm"></div>
-              <h2 className="text-5xl font-bold text-white">Featured Events</h2>
+              <h2 className="text-5xl font-bold text-white">Featured Resources</h2>
             </div>
-            <p className="text-gray-400 text-xl">Don't miss these upcoming highlights</p>
+            <p className="text-gray-400 text-xl">Most popular downloads this month</p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-8">
-            {featuredEvents.map((event, index) => (
+            {featuredResources.map((resource, index) => (
               <motion.div
-                key={event.id}
+                key={resource.id}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -179,26 +200,32 @@ const Events = () => {
                 className="relative group"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/30 to-pink-500/30 rounded-sm blur-3xl opacity-0 group-hover:opacity-100 transition-all"></div>
-                
+
                 <div className="relative overflow-hidden rounded-sm border border-cyan-500/20 bg-white/5 backdrop-blur-xl hover:border-cyan-500/40 transition-all">
                   {/* Image Section */}
                   <div className="relative h-80 overflow-hidden">
                     <img 
-                      src={event.image}
-                      alt={event.title}
+                      src={resource.image}
+                      alt={resource.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
 
-                    {/* Category Badge */}
+                    {/* Type Badge */}
                     <div className="absolute top-6 right-6 px-4 py-2 bg-cyan-500/90 backdrop-blur-sm rounded-sm">
-                      <span className="text-white text-sm font-bold">{event.category}</span>
+                      <span className="text-white text-sm font-bold">{resource.type}</span>
                     </div>
 
-                    {/* Attendees */}
-                    <div className="absolute top-6 left-6 flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-sm">
-                      <LiaPeopleCarrySolid className="w-4 h-4 text-white" />
-                      <span className="text-white text-sm font-bold">{event.attendees}</span>
+                    {/* Featured Badge */}
+                    <div className="absolute top-6 left-6 px-4 py-2 bg-pink-500/90 backdrop-blur-sm rounded-sm flex items-center gap-2">
+                      <Heart className="w-4 h-4 text-white" />
+                      <span className="text-white text-sm font-bold">Featured</span>
+                    </div>
+
+                    {/* Downloads Count */}
+                    <div className="absolute bottom-6 left-6 px-4 py-2 bg-white/10 backdrop-blur-md rounded-sm flex items-center gap-2">
+                      <Download className="w-4 h-4 text-white" />
+                      <span className="text-white text-sm font-bold">{resource.downloads} downloads</span>
                     </div>
 
                     {/* Action Buttons */}
@@ -208,7 +235,7 @@ const Events = () => {
                         whileTap={{ scale: 0.9 }}
                         className="p-3 bg-white/20 backdrop-blur-md rounded-sm hover:bg-white/30 transition-all"
                       >
-                        <Heart className="w-5 h-5 text-white" />
+                        <Eye className="w-5 h-5 text-white" />
                       </motion.button>
                       <motion.button
                         whileHover={{ scale: 1.1 }}
@@ -222,44 +249,30 @@ const Events = () => {
 
                   {/* Content Section */}
                   <div className="p-8">
-                    <h3 className="text-3xl font-bold text-white mb-4 group-hover:text-cyan-400 transition-colors">
-                      {event.title}
-                    </h3>
-
-                    <p className="text-gray-300 text-lg mb-6 leading-relaxed">
-                      {event.description}
-                    </p>
-
-                    {/* Event Details */}
-                    <div className="space-y-3 mb-6">
-                      <div className="flex items-center gap-3 text-gray-300">
-                        <div className="p-2 bg-cyan-500/20 rounded-sm">
-                          <Calendar className="w-5 h-5 text-cyan-400" />
-                        </div>
-                        <span className="font-medium">{event.date}</span>
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className={`p-3 bg-gradient-to-br ${resource.gradient} rounded-sm`}>
+                        <resource.icon className="w-6 h-6 text-white" />
                       </div>
-                      <div className="flex items-center gap-3 text-gray-300">
-                        <div className="p-2 bg-pink-500/20 rounded-sm">
-                          <Clock className="w-5 h-5 text-pink-400" />
-                        </div>
-                        <span className="font-medium">{event.time}</span>
-                      </div>
-                      <div className="flex items-center gap-3 text-gray-300">
-                        <div className="p-2 bg-purple-500/20 rounded-sm">
-                          <MapPin className="w-5 h-5 text-purple-400" />
-                        </div>
-                        <span className="font-medium">{event.location}</span>
+                      <div className="px-3 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded-sm">
+                        <span className="text-cyan-400 text-xs font-semibold">{resource.category}</span>
                       </div>
                     </div>
 
-                    {/* CTA Button */}
+                    <h3 className="text-3xl font-bold text-white mb-4 group-hover:text-cyan-400 transition-colors">
+                      {resource.title}
+                    </h3>
+
+                    <p className="text-gray-300 text-lg mb-6 leading-relaxed">
+                      {resource.description}
+                    </p>
+
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       className="w-full px-6 py-4 bg-gradient-to-r from-cyan-500 to-pink-500 text-white rounded-sm font-bold flex items-center justify-center gap-2 shadow-lg"
                     >
-                      <span>{t.events.register}</span>
-                      <ArrowRight className="w-5 h-5" />
+                      <Download className="w-5 h-5" />
+                      <span>Download Now</span>
                     </motion.button>
                   </div>
                 </div>
@@ -269,15 +282,23 @@ const Events = () => {
         </div>
       </section>
 
-      {/* Filter Bar */}
+      {/* Search & Filter */}
       <section className="py-12 px-4 sm:px-6 lg:px-8 bg-black sticky top-20 z-20 backdrop-blur-xl bg-black/80 border-b border-cyan-500/10">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Filter className="w-5 h-5 text-gray-400" />
-              <span className="text-gray-400 font-medium">Filter by:</span>
+          <div className="flex flex-col md:flex-row gap-4">
+            {/* Search */}
+            <div className="flex-1 relative">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search resources..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-12 pr-4 py-4 bg-white/5 backdrop-blur-xl border border-cyan-500/20 rounded-sm text-white placeholder-gray-500 focus:border-cyan-500/40 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all"
+              />
             </div>
-            
+
+            {/* Category Filter */}
             <div className="flex gap-2 overflow-x-auto scrollbar-hide">
               {categories.map((category) => (
                 <motion.button
@@ -285,7 +306,7 @@ const Events = () => {
                   onClick={() => setSelectedCategory(category)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`px-6 py-3 rounded-sm font-semibold whitespace-nowrap transition-all ${
+                  className={`px-6 py-4 rounded-sm font-semibold whitespace-nowrap transition-all ${
                     selectedCategory === category
                       ? 'bg-gradient-to-r from-cyan-500 to-pink-500 text-white shadow-lg shadow-cyan-500/30'
                       : 'bg-white/5 backdrop-blur-sm border border-cyan-500/20 text-gray-300 hover:bg-white/10 hover:border-cyan-500/40'
@@ -299,21 +320,21 @@ const Events = () => {
         </div>
       </section>
 
-      {/* All Events Grid */}
+      {/* All Resources Grid */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-1 h-10 bg-gradient-to-b from-cyan-500 to-pink-500 rounded-sm"></div>
-              <h2 className="text-5xl font-bold text-white">{t.events.upcoming}</h2>
+              <h2 className="text-5xl font-bold text-white">All Resources</h2>
             </div>
-            <p className="text-gray-400 text-xl">All upcoming events at Movement Church</p>
+            <p className="text-gray-400 text-xl">Browse our complete library</p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredEvents.map((event, index) => (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {filteredResources.map((resource, index) => (
               <motion.div
-                key={event.id}
+                key={resource.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -324,53 +345,51 @@ const Events = () => {
 
                 <div className="relative overflow-hidden rounded-sm border border-cyan-500/20 bg-white/5 backdrop-blur-xl hover:border-cyan-500/40 transition-all">
                   {/* Image */}
-                  <div className="relative h-56 overflow-hidden">
+                  <div className="relative h-48 overflow-hidden">
                     <img 
-                      src={event.image}
-                      alt={event.title}
+                      src={resource.image}
+                      alt={resource.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
 
-                    {/* Category Badge */}
-                    <div className="absolute top-4 right-4 px-3 py-1.5 bg-cyan-500/90 backdrop-blur-sm rounded-sm">
-                      <span className="text-white text-xs font-bold">{event.category}</span>
+                    {/* Icon Badge */}
+                    <div className={`absolute top-4 left-4 p-3 bg-gradient-to-br ${resource.gradient} rounded-sm`}>
+                      <resource.icon className="w-6 h-6 text-white" />
                     </div>
 
-                    {/* Date Display */}
-                    <div className="absolute bottom-4 left-4 px-4 py-2 bg-white/10 backdrop-blur-md rounded-sm">
-                      <div className="text-white text-sm font-bold">{event.date}</div>
+                    {/* Type Badge */}
+                    <div className="absolute top-4 right-4 px-3 py-1.5 bg-cyan-500/90 backdrop-blur-sm rounded-sm">
+                      <span className="text-white text-xs font-bold">{resource.type}</span>
+                    </div>
+
+                    {/* Downloads */}
+                    <div className="absolute bottom-4 left-4 px-3 py-1.5 bg-white/10 backdrop-blur-md rounded-sm flex items-center gap-1.5">
+                      <Download className="w-3.5 h-3.5 text-white" />
+                      <span className="text-white text-xs font-bold">{resource.downloads}</span>
                     </div>
                   </div>
 
                   {/* Content */}
                   <div className="p-6">
+                    <div className="px-3 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded-sm inline-block mb-3">
+                      <span className="text-cyan-400 text-xs font-semibold">{resource.category}</span>
+                    </div>
+
                     <h3 className="text-xl font-bold text-white mb-2 line-clamp-2 group-hover:text-cyan-400 transition-colors">
-                      {event.title}
+                      {resource.title}
                     </h3>
 
                     <p className="text-gray-400 text-sm mb-4 line-clamp-2">
-                      {event.description}
+                      {resource.description}
                     </p>
-
-                    {/* Quick Info */}
-                    <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                      <div className="flex items-center gap-1.5">
-                        <Clock className="w-4 h-4" />
-                        <span>{event.time}</span>
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <LiaPeopleCarrySolid className="w-4 h-4" />
-                        <span>{event.attendees}</span>
-                      </div>
-                    </div>
 
                     <motion.button
                       whileHover={{ x: 5 }}
                       className="text-cyan-400 font-semibold flex items-center gap-2 group/btn"
                     >
-                      <span>Learn More</span>
-                      <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                      <span>Download</span>
+                      <Download className="w-4 h-4 group-hover/btn:translate-y-1 transition-transform" />
                     </motion.button>
                   </div>
                 </div>
@@ -385,7 +404,7 @@ const Events = () => {
               whileTap={{ scale: 0.95 }}
               className="px-10 py-4 bg-white/5 backdrop-blur-sm border-2 border-cyan-500/30 text-white rounded-sm font-bold hover:bg-white/10 hover:border-cyan-500/50 transition-all inline-flex items-center gap-2"
             >
-              <span>Load More Events</span>
+              <span>Load More Resources</span>
               <ArrowRight className="w-5 h-5" />
             </motion.button>
           </div>
@@ -397,10 +416,10 @@ const Events = () => {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { number: '50+', label: 'Annual Events', icon: Calendar },
-              { number: '2000+', label: 'Total Attendees', icon: LiaPeopleCarrySolid },
-              { number: '15+', label: 'Event Categories', icon: Filter },
-              { number: '100%', label: 'Community Impact', icon: Heart },
+              { number: '100+', label: 'Total Resources', icon: BookOpen },
+              { number: '25K+', label: 'Downloads', icon: Download },
+              { number: '50+', label: 'Study Guides', icon: FileText },
+              { number: '12', label: 'Podcast Series', icon: Headphones },
             ].map((stat, index) => (
               <motion.div
                 key={index}
@@ -412,7 +431,7 @@ const Events = () => {
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-pink-500/20 rounded-sm blur-2xl opacity-0 group-hover:opacity-100 transition-all"></div>
                 <div className="relative p-8 bg-white/5 backdrop-blur-xl border border-cyan-500/20 rounded-sm hover:border-cyan-500/40 transition-all text-center">
-                  <div className="inline-flex p-4 bg-gradient-to-br from-cyan-500 to-pink-500 rounded-2xl mb-4">
+                  <div className="inline-flex p-4 bg-gradient-to-br from-cyan-500 to-pink-500 rounded-sm mb-4">
                     <stat.icon className="w-8 h-8 text-white" />
                   </div>
                   <div className="text-5xl font-bold text-white mb-2 bg-gradient-to-r from-cyan-400 to-pink-400 bg-clip-text text-transparent">
@@ -426,13 +445,13 @@ const Events = () => {
         </div>
       </section>
 
-      {/* Host Event CTA */}
+      {/* Subscribe Section */}
       <section className="relative py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0">
           <img 
-            src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=1600&q=80" 
-            alt="Host event" 
+            src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1600&q=80" 
+            alt="Subscribe" 
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/80"></div>
@@ -447,32 +466,29 @@ const Events = () => {
             viewport={{ once: true }}
           >
             <div className="inline-flex p-6 bg-white/10 backdrop-blur-md rounded-sm mb-8">
-              <Plus className="w-16 h-16 text-white" />
+              <CheckCircle className="w-16 h-16 text-white" />
             </div>
 
             <h2 className="text-5xl sm:text-6xl font-bold text-white mb-6 leading-tight">
-              Host an Event
+              Get New Resources Weekly
             </h2>
 
             <p className="text-xl sm:text-2xl text-gray-200 mb-12 max-w-2xl mx-auto">
-              Have an idea for an event? We'd love to hear from you and help make it happen at Movement Church!
+              Subscribe to receive the latest study guides, devotionals, and teaching materials delivered to your inbox.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-1 px-6 py-4 bg-white/10 backdrop-blur-md border-2 border-white/20 rounded-sm text-white placeholder-gray-400 focus:border-cyan-500/50 focus:outline-none"
+              />
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-10 py-5 bg-gradient-to-r from-cyan-500 to-pink-500 text-white rounded-sm font-bold text-lg shadow-2xl shadow-cyan-500/50"
+                className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-pink-500 text-white rounded-sm font-bold shadow-2xl shadow-cyan-500/50 whitespace-nowrap"
               >
-                Submit Event Idea
-              </motion.button>
-
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-10 py-5 bg-white/10 backdrop-blur-md border-2 border-white/30 text-white rounded-sm font-bold text-lg hover:bg-white/20 transition-all"
-              >
-                Contact Events Team
+                Subscribe Now
               </motion.button>
             </div>
           </motion.div>
@@ -482,4 +498,4 @@ const Events = () => {
   );
 };
 
-export default Events;
+export default Resources;
